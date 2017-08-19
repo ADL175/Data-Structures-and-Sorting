@@ -121,3 +121,30 @@ class LinkedList(object):
     def __repr__(self):
         """String representation of this object."""
         return self.display()
+
+    def append(self, value):
+        """O(n) adds new value to tail."""
+        if self.head is None:
+            self.push(value)
+            return
+        current = self.head
+        while current.next is not None:
+            current = current.next
+        current.next = Node(value, None)
+        self.length += 1
+
+    def reverse(self):
+        """reverse a LL in place."""
+        if self.head is None or self.head.next is None:
+            return "Nothing to reverse"
+        prev = None
+        cur = self.head
+        nextup = cur.next
+        while cur is not None:
+            cur.next = prev
+            prev = cur
+            cur = nextup
+            if cur is None:
+                break
+            nextup = cur.next
+        self.head = prev
